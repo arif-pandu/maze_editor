@@ -48,12 +48,21 @@ class _GridMazeState extends State<GridMaze> {
             scrollDirection: Axis.vertical,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
-              return AnimatedContainer(
-                duration: const Duration(milliseconds: 20),
-                decoration: BoxDecoration(
-                  color: mainProv.listColor[index],
+              return GestureDetector(
+                onLongPress: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text("INDEX : ${index + 1}"),
+                    ),
+                  );
+                },
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 20),
+                  decoration: BoxDecoration(
+                    color: mainProv.listColor[index],
+                  ),
+                  margin: const EdgeInsets.all(1),
                 ),
-                margin: const EdgeInsets.all(1),
               );
             },
           ),

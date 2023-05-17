@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:map_generator/provider/main_provider.dart';
 import 'package:map_generator/widget/copy_button.dart';
 import 'package:map_generator/widget/delete_button.dart';
