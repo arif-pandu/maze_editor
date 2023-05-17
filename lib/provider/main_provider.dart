@@ -47,4 +47,11 @@ class MainProvider with ChangeNotifier {
     editState = EditState.delete;
     notifyListeners();
   }
+
+  void applyInput({required List<int> walls}) {
+    for (var ele in walls) {
+      listColor[ele - 1] = Colors.black87;
+    }
+    notifyListeners();
+  }
 }

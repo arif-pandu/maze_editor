@@ -8,8 +8,21 @@ import 'package:map_generator/widget/reset_button.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  TextEditingController textEditingController = TextEditingController();
+
+  @override
+  void dispose() {
+    textEditingController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +58,29 @@ class HomeScreen extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          SizedBox(
+                            width: 20.w,
+                            child: TextField(
+                              controller: textEditingController,
+                            ),
+                          ),
+                          SizedBox(width: 10),
+                          GestureDetector(
+                            onTap: () {
+                              mainProv.applyInput(
+                                walls: convertStringToList(
+                                  textEditingController.value.text,
+                                ),
+                              );
+                            },
+                            child: Icon(Icons.send_rounded),
+                          ),
+                        ],
+                      ),
                       ResetButton(
                         onTap: () {
                           mainProv.resetMaze();
@@ -75,4 +111,8 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+List<int> convertStringToList(String numbersString) {
+  return numbersString.replaceAll(' ', '').split(',').map(int.parse).toList();
 }
